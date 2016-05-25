@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour {
 	public bool noDamage;			//triggered when player dies
 	public Image healthbar;
 	public AudioClip deathclip;
-
 	
 	void Start () {
 		canFire = true;
@@ -64,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (other.CompareTag ("EnemyProjectile") && (other.gameObject.GetComponent<projectileMovement>().hasTriggered == false)) {
 			if(!noDamage){
 				other.gameObject.GetComponent<projectileMovement>().trigger();
-				healthbar.fillAmount -= .03f;
+				healthbar.fillAmount -= .0625f;
 				anim.SetBool("IsHit", true);
 				AudioSource.PlayClipAtPoint(deathclip, new Vector3(0,0,-7));
 				destroyAllEnemyBullets();

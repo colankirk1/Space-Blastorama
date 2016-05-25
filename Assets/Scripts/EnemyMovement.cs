@@ -131,7 +131,6 @@ public class EnemyMovement : MonoBehaviour {
 	//shoots a bullet aimed directly at the player
 	public void shootHoming(){
 		GameObject newObject = Instantiate (prefab, position, Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
-		//Vector3 dir = (GameObject.Find("Player").transform.position - position).normalized;
 		Vector3 dir = (tempPlayer.transform.position - position).normalized;
 		newObject.GetComponent<Rigidbody2D> ().velocity = dir * projectileSpeed;
 		if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
@@ -143,7 +142,6 @@ public class EnemyMovement : MonoBehaviour {
 
 	//shoots 2 bullets - aimed at player, but both missing by a margin on each side
 	public void shootDualHoming(){
-		//Vector3 temp = GameObject.Find("Player").transform.position;
 		Vector3 temp = tempPlayer.transform.position;
 		GameObject newObject = Instantiate (prefab, position, Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
 		Vector3 dir = (temp - position).normalized;
@@ -173,38 +171,13 @@ public class EnemyMovement : MonoBehaviour {
 		}
 	}
 
-	//shoots 3 bullets - one aimed directly at the player, and the other two missing by a margin on each side
+	//Semi-homing: aimed at the player but scattered
 	public void shootTriHoming(){
-		//Vector3 temp = GameObject.Find("Player").transform.position;
+		rand = Random.Range (0, 40);
 		Vector3 temp = tempPlayer.transform.position;
 		GameObject newObject = Instantiate (prefab, position, Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
 		Vector3 dir = (temp - position).normalized;
-		newObject.GetComponent<Rigidbody2D> ().velocity = dir * projectileSpeed;
-		if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
-			projectileAnim = newObject.GetComponent<Animator>();
-			projectileAnim.SetBool("fade", true);
-			StartCoroutine(bulletFade(newObject));
-		}
-		newObject = Instantiate (prefab, position, Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
-		dir = (temp - position).normalized;
-		if(Mathf.Abs(temp.y - position.y) > 2)
-			dir.x += .3f;
-		else {
-			dir.y += .3f;
-		}
-		newObject.GetComponent<Rigidbody2D> ().velocity = dir * projectileSpeed;
-		if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
-			projectileAnim = newObject.GetComponent<Animator>();
-			projectileAnim.SetBool("fade", true);
-			StartCoroutine(bulletFade(newObject));
-		}
-		newObject = Instantiate (prefab, position, Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
-		dir = (temp - position).normalized;
-		if(Mathf.Abs(temp.y - position.y) > 2)
-			dir.x -= .3f;
-		else {
-			dir.y -= .3f;
-		}
+		dir.x += (.2f - (rand / 100.0f));
 		newObject.GetComponent<Rigidbody2D> ().velocity = dir * projectileSpeed;
 		if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
 			projectileAnim = newObject.GetComponent<Animator>();

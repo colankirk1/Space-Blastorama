@@ -102,9 +102,9 @@ public class BackgroundMusicController : MonoBehaviour {
 		ySpawn = new float[]{5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f};
 		movement = new int[] {4,4,5,5,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4};
 		projectileSpeed = new float[] {2,2,3,3,4,4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8,8,4,4,5};
-		freq = new float[] {2,2,1,1,.6f,.6f,.6f,.6f,.6f,.6f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.4f};
+		freq = new float[] {2,2,1,1,.6f,.6f,.3f,.3f,.6f,.6f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.2f,.4f};
 		style = new int[] {6,6,4,4,0,1,2,2,1,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,5};
-		spawnTime = new float[]{1,1,14,14,25,30,35,40,45,45,55,55,55.5f,55.5f,56,56,56.5f,56.5f,57,57,57.5f,57.5f,58,58,60,60,60,999};
+		spawnTime = new float[]{1,1,14,14,25,30,35,40,45,45,55,55,55.5f,55.5f,56,56,56.5f,56.5f,57,57,57.5f,57.5f,58,58,58,58,58,999};
 		delay = new float[] {2,3,2,3,1.6f,1.6f,1.6f,1.6f,1.6f,1.6f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,.1f,1.6f,1.6f,4};
 		health = new int[] {15,15,20,20,20,20,12,12,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,20,20,80};
 
@@ -136,18 +136,19 @@ public class BackgroundMusicController : MonoBehaviour {
 		StartCoroutine (WaveDelay (16));	//10 second wave, 6 second delay
 	}
 
+	//horizontal line of homing enemies
 	void wave4(){
 		arrayCount = 0;
 
-		xSpawn = new float[] {-3,-2,-1,0,1,2,3};
-		ySpawn = new float[] {5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f};
-		movement = new int[] {4,4,5,5,5,4,4};
-		projectileSpeed = new float[] {4,4,4,4,4,4,4};
-		freq = new float[] {.7f,.7f,.7f,.7f,.7f,.7f,.7f};
-		style = new int[] {0,0,0,0,0,0,0};
-		spawnTime = new float[] {1,1,1,1,1,1,1,999};
-		delay = new float[] {2,2,2,2,2,2,2};
-		health = new int[] {10,10,10,10,10,10,10};
+		xSpawn = new float[] {-3,-2,-1,0,1,2,3,0};
+		ySpawn = new float[] {5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f,5.6f};
+		movement = new int[] {4,4,5,5,5,4,4,4};
+		projectileSpeed = new float[] {4,4,4,4,4,4,4,2};
+		freq = new float[] {.7f,.7f,.7f,.7f,.7f,.7f,.7f,1};
+		style = new int[] {0,0,0,0,0,0,0,6};
+		spawnTime = new float[] {1,1,1,1,1,1,1,15,999};
+		delay = new float[] {2,2,2,2,2,2,2,2};
+		health = new int[] {10,10,10,10,10,10,10,20};
 
 		time = songTime;
 		for (int x = 0; x<spawnTime.Length; x++) {
@@ -156,6 +157,7 @@ public class BackgroundMusicController : MonoBehaviour {
 		StartCoroutine (WaveDelay (20));	//1 second wave + 19 second delay
 	}
 
+	//final mass spam
 	void wave5(){
 		arrayCount = 0;
 
