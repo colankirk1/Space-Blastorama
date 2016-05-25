@@ -52,23 +52,27 @@ public class BackgroundMusicController : MonoBehaviour {
 		}
 
 		stage1.Play ();
-		//StartCoroutine (WaveDelay (25.8f));		//how long before the first wave
-		StartCoroutine (WaveDelay (0));
+		StartCoroutine(MusicDelay (1));
+		/*
+		StartCoroutine (WaveDelay (25.8f));		//how long before the first wave
+		//StartCoroutine (WaveDelay (0));
 		StartCoroutine(MusicDelay (188.0f)); 	//how long the song is
-		StartCoroutine(GUIDelay (4));			//how long before tutorial text
-		GameObject newObject = Instantiate (enemyPrefab, new Vector2 (0, 6), Quaternion.identity) as GameObject;
+		StartCoroutine(GUIDelay (4));			//how long before tutorial text*/
+
+		//For testing purposes
+		/*GameObject newObject = Instantiate (enemyPrefab, new Vector2 (0, 6), Quaternion.identity) as GameObject;
 		EnemyMovement enemy = newObject.GetComponent<EnemyMovement> ();
-		enemy.move (7, 4, .5f, 3, .1f, 99);
+		enemy.move (7, 4, .5f, 3, .1f, 99);*/
 	}
 
 	void Update () {
-		/*songTime = stage1.time;
+		songTime = stage1.time;
 		while (inStage && songTime >= spawnTime[arrayCount]) {
 			GameObject newObject = Instantiate (enemyPrefab, new Vector2 (xSpawn [arrayCount], ySpawn [arrayCount]), Quaternion.identity) as GameObject;
 			EnemyMovement enemy = newObject.GetComponent<EnemyMovement> ();
 			enemy.move (movement[arrayCount], projectileSpeed[arrayCount], freq[arrayCount], style[arrayCount], delay[arrayCount], health[arrayCount]);
 			arrayCount++;
-		}*/
+		}
 	}
 
 	//Left burst, 3 right rains x3 with increasing difficulty

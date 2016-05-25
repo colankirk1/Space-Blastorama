@@ -278,6 +278,7 @@ public class EnemyMovement : MonoBehaviour {
 		}
 	}
 
+	//Delete bullets after their fade animation
 	IEnumerator bulletFade(GameObject projectile) 
 	{
 		yield return new WaitForSeconds(.5f);

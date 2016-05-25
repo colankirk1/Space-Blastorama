@@ -8,6 +8,7 @@ public class Boss1Behavior : MonoBehaviour {
 	public GameObject prefab;
 	public GameObject prefab2;
 	public GameObject prefab3;
+	private GameObject tempPlayer;
 
 	private bool isInPattern1;	
 	private bool isInPattern2;
@@ -24,11 +25,12 @@ public class Boss1Behavior : MonoBehaviour {
 	public AudioClip shock;
 	public AudioClip death;
 	public GameObject white;
+	Animator projectileAnim;
 	
 	void Start () {
 		bossRigidbody = GetComponent<Rigidbody2D>();
-		isInPattern1 = true;
-		isInPattern2 = false;
+		isInPattern1 = false;//true;
+		isInPattern2 = true;//false;
 		isInPattern3 = false;
 		isInPattern4 = false;
 		patternMode = 0;
@@ -36,8 +38,10 @@ public class Boss1Behavior : MonoBehaviour {
 		count = 0;
 		healthbar.fillAmount = 1;
 		canTakeDamage = true;
+		tempPlayer = GameObject.Find("Player");
 
-		InvokeRepeating("pattern1", .5f, .1f);
+		InvokeRepeating ("pattern2", .5f, .1f);
+		//InvokeRepeating("pattern1", .5f, .1f);
 	}
 
 	void OnTriggerEnter2D( Collider2D other )
@@ -77,6 +81,11 @@ public class Boss1Behavior : MonoBehaviour {
 				projectile.setForce (4);
 				projectile.setvForce (Quaternion.AngleAxis (x, Vector3.forward) * Vector3.up);
 				projectile.move ();
+				if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+					projectileAnim = newObject.GetComponent<Animator>();
+					projectileAnim.SetBool("fade", true);
+					StartCoroutine(bulletFade(newObject));
+				}
 			}
 		}
 		patternMode++;
@@ -104,6 +113,12 @@ public class Boss1Behavior : MonoBehaviour {
 				projectile.setForce (4);
 				projectile.setvForce (Quaternion.AngleAxis (rand - 25, Vector3.forward) * Vector3.up);
 				projectile.move ();
+				if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+					projectileAnim = newObject.GetComponent<Animator>();
+					projectileAnim.SetBool("fade", true);
+					StartCoroutine(bulletFade(newObject));
+				}
+
 			}
 			for (int x = rand; x<360; x+=15) {
 				GameObject newObject = Instantiate (prefab, bossRigidbody.position, Quaternion.identity) as GameObject;
@@ -111,6 +126,11 @@ public class Boss1Behavior : MonoBehaviour {
 				projectile.setForce (4);
 				projectile.setvForce (Quaternion.AngleAxis (x - 10, Vector3.forward) * Vector3.up);
 				projectile.move ();
+				if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+					projectileAnim = newObject.GetComponent<Animator>();
+					projectileAnim.SetBool("fade", true);
+					StartCoroutine(bulletFade(newObject));
+				}
 			}
 		}
 		count++;
@@ -133,6 +153,11 @@ public class Boss1Behavior : MonoBehaviour {
 				projectile.setForce (3);
 				projectile.setvForce (Quaternion.AngleAxis (x, Vector3.forward) * Vector3.up);
 				projectile.move ();
+				if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+					projectileAnim = newObject.GetComponent<Animator>();
+					projectileAnim.SetBool("fade", true);
+					StartCoroutine(bulletFade(newObject));
+				}
 			}
 		}
 		//waves - x = 6 are the 6 bullets in each wave that move at varying speeds
@@ -143,12 +168,22 @@ public class Boss1Behavior : MonoBehaviour {
 			projectile.setForce (x);
 			projectile.setvForce (Quaternion.AngleAxis (180, Vector3.forward) * Vector3.up);
 			projectile.move ();
+			if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+				projectileAnim = newObject.GetComponent<Animator>();
+				projectileAnim.SetBool("fade", true);
+				StartCoroutine(bulletFade(newObject));
+			}
 			temp.x -=count*2;
 			newObject = Instantiate (prefab2, temp, Quaternion.identity) as GameObject;
 			projectile = newObject.GetComponent<projectileMovement> ();
 			projectile.setForce (x);
 			projectile.setvForce (Quaternion.AngleAxis (180, Vector3.forward) * Vector3.up);
 			projectile.move ();
+			if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+				projectileAnim = newObject.GetComponent<Animator>();
+				projectileAnim.SetBool("fade", true);
+				StartCoroutine(bulletFade(newObject));
+			}
 			temp.x+=count;
 		}
 		count -= .5f;
@@ -200,12 +235,22 @@ public class Boss1Behavior : MonoBehaviour {
 			projectile.setForce (3);
 			projectile.setvForce (Quaternion.AngleAxis (x, Vector3.forward) * Vector3.up);
 			projectile.move ();
+			if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+				projectileAnim = newObject.GetComponent<Animator>();
+				projectileAnim.SetBool("fade", true);
+				StartCoroutine(bulletFade(newObject));
+			}
 		} else if (patternMode == 1) {
 			GameObject newObject = Instantiate (prefab2, temp, Quaternion.identity) as GameObject;
 			projectileMovement projectile = newObject.GetComponent<projectileMovement> ();
 			projectile.setForce (2.5f);
 			projectile.setvForce (Quaternion.AngleAxis (x, Vector3.forward) * Vector3.up);
 			projectile.move ();
+			if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+				projectileAnim = newObject.GetComponent<Animator>();
+				projectileAnim.SetBool("fade", true);
+				StartCoroutine(bulletFade(newObject));
+			}
 		}
 		else if (patternMode == 2) {
 			GameObject newObject = Instantiate (prefab3, temp, Quaternion.identity) as GameObject;
@@ -213,6 +258,11 @@ public class Boss1Behavior : MonoBehaviour {
 			projectile.setForce (2);
 			projectile.setvForce (Quaternion.AngleAxis (x, Vector3.forward) * Vector3.up);
 			projectile.move ();
+			if (tempPlayer.GetComponent<PlayerMovement> ().stopEnemyBullets == true) {
+				projectileAnim = newObject.GetComponent<Animator>();
+				projectileAnim.SetBool("fade", true);
+				StartCoroutine(bulletFade(newObject));
+			}
 		}
 		patternMode++;
 		if (patternMode == 3)
@@ -240,7 +290,10 @@ public class Boss1Behavior : MonoBehaviour {
 		
 		for(var i = 0 ; i < gameObjects.Length ; i ++)
 		{
-			Destroy(gameObjects[i]);
+			projectileAnim = gameObjects[i].GetComponent<Animator>();
+			projectileAnim.SetBool("fade", true);
+			StartCoroutine(bulletFade(gameObjects[i]));
+			//Destroy(gameObjects[i]);
 		}
 	}
 
@@ -269,7 +322,8 @@ public class Boss1Behavior : MonoBehaviour {
 			}
 		} else {
 			AudioSource.PlayClipAtPoint(death, new Vector3(0,0,-8));
-			white.GetComponent<whitescript>().set();
+			white.SetActive (true);
+			//white.GetComponent<whitescript>().set();
 			playerHealthbar.CrossFadeAlpha(0, 2, false);
 			playerHealthtext.CrossFadeAlpha(0, 2, false);
 			StartCoroutine (endDelay (3.0f));
@@ -280,5 +334,12 @@ public class Boss1Behavior : MonoBehaviour {
 	IEnumerator endDelay (float x){
 		yield return new WaitForSeconds (x);
 		Application.LoadLevel(2);
+	}
+
+	//Delete bullets after their fade animation
+	IEnumerator bulletFade(GameObject projectile) 
+	{
+		yield return new WaitForSeconds(.5f);
+		Destroy (projectile);
 	}
 }

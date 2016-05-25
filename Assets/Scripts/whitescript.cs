@@ -9,7 +9,7 @@ public class whitescript : MonoBehaviour {
 		anim = GetComponent<Animator>();
 	}
 
-	public void set(){
+	/*public void set(){
 		anim.SetBool("hasWon", true);
-	}
+	}*/
 }
