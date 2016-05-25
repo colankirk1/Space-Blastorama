@@ -52,8 +52,8 @@ public class BackgroundMusicController : MonoBehaviour {
 		}
 
 		stage1.Play ();
-		StartCoroutine(MusicDelay (1));
-		/*
+		//StartCoroutine(MusicDelay (1));
+
 		StartCoroutine (WaveDelay (25.8f));		//how long before the first wave
 		//StartCoroutine (WaveDelay (0));
 		StartCoroutine(MusicDelay (188.0f)); 	//how long the song is

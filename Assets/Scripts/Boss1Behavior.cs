@@ -29,8 +29,8 @@ public class Boss1Behavior : MonoBehaviour {
 	
 	void Start () {
 		bossRigidbody = GetComponent<Rigidbody2D>();
-		isInPattern1 = false;//true;
-		isInPattern2 = true;//false;
+		isInPattern1 = true;
+		isInPattern2 = false;
 		isInPattern3 = false;
 		isInPattern4 = false;
 		patternMode = 0;
@@ -40,8 +40,8 @@ public class Boss1Behavior : MonoBehaviour {
 		canTakeDamage = true;
 		tempPlayer = GameObject.Find("Player");
 
-		InvokeRepeating ("pattern2", .5f, .1f);
-		//InvokeRepeating("pattern1", .5f, .1f);
+		//InvokeRepeating ("pattern2", .5f, .1f);
+		InvokeRepeating("pattern1", .5f, .1f);
 	}
 
 	void OnTriggerEnter2D( Collider2D other )

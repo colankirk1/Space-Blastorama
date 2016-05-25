@@ -13,6 +13,8 @@ public class MyUnitySingleton : MonoBehaviour {
 		if (instance != null) {
 			instance.GetComponent<SpriteRenderer> ().enabled = true;
 			instance.GetComponent<BoxCollider2D> ().isTrigger = false;
+			if(instance.GetComponent<AudioSource>().isPlaying == false)
+				instance.GetComponent<AudioSource>().Play();
 		}
 		if (instance != null && instance != this) {
 			Destroy(this.gameObject);
